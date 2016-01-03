@@ -712,12 +712,15 @@ public class MarqueeLabel: UILabel {
         // Set mask
         self.layer.mask = gradientMask
         
+        CATransaction.begin()
+        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         gradientMask.bounds = self.layer.bounds
         gradientMask.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
         gradientMask.shouldRasterize = true
         gradientMask.rasterizationScale = UIScreen.mainScreen().scale
         gradientMask.startPoint = CGPointMake(0.0, 0.5)
         gradientMask.endPoint = CGPointMake(1.0, 0.5)
+        CATransaction.commit()
         
         let leftFadeStop = fadeLength/self.bounds.size.width
         let rightFadeStop = fadeLength/self.bounds.size.width
@@ -757,9 +760,12 @@ public class MarqueeLabel: UILabel {
             group.animations = [locationAnimation, colorAnimation]
             group.duration = 0.25
             
+            CATransaction.begin()
+            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
             gradientMask.addAnimation(group, forKey: colorAnimation.keyPath)
             gradientMask.locations = adjustedLocations
             gradientMask.colors = adjustedColors
+            CATransaction.commit()
         } else {
             CATransaction.begin()
             CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
