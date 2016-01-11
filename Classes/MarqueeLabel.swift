@@ -68,7 +68,7 @@ public class MarqueeLabel: UILabel {
 
     /// Start scrolling animation from `home` position
     public func startScrolling() {
-        beginScroll()
+        beginScroll(false)
     }
     
     public var holdScrolling: Bool = false {
