@@ -54,8 +54,8 @@ extension ViewController: UITableViewDataSource {
         let cell = tableview.dequeueReusableCellWithIdentifier("Cell") as! CellType!
         cell.marquee.text = labels[indexPath.row]
         cell.marquee.scrollDuration = defaultScrollDuration
-        cell.marquee.holdScrolling = true
         cell.marquee.lineBreakMode = NSLineBreakMode(rawValue: indexPath.row % 6)!
+        cell.marquee.stopScrolling()
         return cell
     }
 }
